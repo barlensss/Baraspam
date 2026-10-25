@@ -21,7 +21,11 @@ except ImportError:
 # KONFIGURASI
 # ==========================================
 NOVA_URL = "https://nova-wawa.vercel.app/api/register"
-USED_KEYS_FILE = "used_keys.txt"
+
+# --- FIX PATH FILE (BIAR GAK ERROR LAGI) ---
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+APIKEY_FILE = os.path.join(BASE_DIR, "apikey.js")
+USED_KEYS_FILE = os.path.join(BASE_DIR, "used_keys.txt")
 
 # KONFIGURASI BREVO SMTP (SESUAI PUNYA LO)
 BREVO_SMTP_SERVER = "smtp-relay.brevo.com"
@@ -65,12 +69,17 @@ def animasi_banner():
         time.sleep(0.05)
 
 def get_decrypted_keys():
+    # Pake APIKEY_FILE yang udah di-set path absolute-nya di atas
     try:
-        with open("apikey.js", "r", encoding="utf-8") as f:
+        with open(APIKEY_FILE, "r", encoding="utf-8") as f:
             content = f.read()
         keys = re.findall(r'"([^"]+)"', content)
         return [k for k in keys if "bara" in k or "vip" in k]
-    except:
+    except FileNotFoundError:
+        print(f"{C_RED}[❌] File apikey.js nggak ketemu di: {APIKEY_FILE}{C_RESET}")
+        return []
+    except Exception as e:
+        print(f"{C_RED}[❌] Error baca apikey.js: {e}{C_RESET}")
         return []
 
 # ==========================================
@@ -129,7 +138,6 @@ def eksekusi_spam_login():
 # MENU 2: SPAM EMAIL (BREVO SMTP + UI HACKER)
 # ==========================================
 def kirim_email_brevo(target, pesan):
-    # UI HTML VIBECODE HACKER THEME + GAMBAR + AUDIO TOGGLE
     html_content = f"""
     <!DOCTYPE html>
     <html>
@@ -138,94 +146,25 @@ def kirim_email_brevo(target, pesan):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&display=swap');
-            
-            body {{ 
-                margin: 0; padding: 40px 20px; 
-                font-family: 'Fira Code', monospace; 
-                background-color: #050505;
-                background-image: 
-                    linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
-                background-size: 20px 20px;
-                color: #00ff41;
-                min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            }}
-            
-            .card {{ 
-                background: rgba(10, 10, 10, 0.9); 
-                border: 2px solid #00ff41;
-                box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1);
-                padding: 30px; border-radius: 12px; 
-                max-width: 500px; width: 100%; text-align: center; 
-                position: relative;
-            }}
-            
-            .glitch-text {{
-                font-family: 'Orbitron', sans-serif;
-                font-size: 28px; font-weight: 900;
-                color: #ff003c;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                text-shadow: 2px 2px 0px #00ff41, -2px -2px 0px #00b0ff;
-                margin-bottom: 20px;
-            }}
-            
-            .gambar {{
-                width: 100%;
-                max-height: 200px;
-                object-fit: cover;
-                border-radius: 8px;
-                border: 1px solid #00ff41;
-                margin-bottom: 20px;
-                filter: grayscale(20%) contrast(120%);
-            }}
-            
-            .pesan-box {{
-                background: rgba(0, 255, 65, 0.1);
-                border-left: 4px solid #00ff41;
-                padding: 15px;
-                text-align: left;
-                margin-bottom: 25px;
-                font-size: 15px;
-                color: #fff;
-            }}
-            
-            /* Tombol Audio Tanpa JS */
-            details {{
-                margin-bottom: 20px;
-                text-align: left;
-            }}
-            summary {{
-                background: #111;
-                border: 1px solid #00ff41;
-                color: #00ff41;
-                padding: 10px;
-                border-radius: 6px;
-                cursor: pointer;
-                font-weight: bold;
-                text-align: center;
-                user-select: none;
-            }}
+            body {{ margin: 0; padding: 40px 20px; font-family: 'Fira Code', monospace; background-color: #050505; background-image: linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px); background-size: 20px 20px; color: #00ff41; min-height: 100vh; display: flex; justify-content: center; align-items: center; }}
+            .card {{ background: rgba(10, 10, 10, 0.9); border: 2px solid #00ff41; box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1); padding: 30px; border-radius: 12px; max-width: 500px; width: 100%; text-align: center; position: relative; }}
+            .glitch-text {{ font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: #ff003c; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 0px #00ff41, -2px -2px 0px #00b0ff; margin-bottom: 20px; }}
+            .gambar {{ width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid #00ff41; margin-bottom: 20px; filter: grayscale(20%) contrast(120%); }}
+            .pesan-box {{ background: rgba(0, 255, 65, 0.1); border-left: 4px solid #00ff41; padding: 15px; text-align: left; margin-bottom: 25px; font-size: 15px; color: #fff; }}
+            details {{ margin-bottom: 20px; text-align: left; }}
+            summary {{ background: #111; border: 1px solid #00ff41; color: #00ff41; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; text-align: center; user-select: none; }}
             summary:hover {{ background: #1a1a1a; }}
             audio {{ width: 100%; margin-top: 10px; outline: none; filter: invert(1); }}
-            
-            .footer {{ 
-                font-size: 11px; color: #555; text-transform: uppercase;
-                letter-spacing: 2px; margin-top: 30px;
-                border-top: 1px dashed #333; padding-top: 15px;
-            }}
+            .footer {{ font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; border-top: 1px dashed #333; padding-top: 15px; }}
         </style>
     </head>
     <body>
         <div class="card">
             <div class="glitch-text">SYSTEM BREACH</div>
-            
             <img src="https://files.catbox.moe/n04bax.png" class="gambar" alt="Bara Exploit">
-            
             <div class="pesan-box">
                 <span style="color: #ff003c;">>_ </span> {pesan}
             </div>
-            
             <details>
                 <summary>🔊 TEKAN UNTUK BUKA AUDIO</summary>
                 <audio controls loop>
@@ -233,7 +172,6 @@ def kirim_email_brevo(target, pesan):
                     Browser lo nggak support audio.
                 </audio>
             </details>
-            
             <div class="footer">DEV: BARA | BARA EXPLOIT TOOLKING</div>
         </div>
     </body>
@@ -255,8 +193,6 @@ def kirim_email_brevo(target, pesan):
         server.quit()
         return True
     except Exception as e:
-        # Kalo error, print di console biar ketauan (opsional)
-        # print(f"[-] Error SMTP: {e}")
         return False
 
 def eksekusi_spam_email():
@@ -279,7 +215,7 @@ def eksekusi_spam_email():
         else:
             print(f"{C_RED}[❌] [{i}/{jumlah}] Gagal (Cek SMTP Brevo lo).{C_RESET}")
             
-        time.sleep(1.5) # Jeda wajib biar ga diblokir Brevo
+        time.sleep(1.5) 
         
     print(f"\n{C_GREEN}[✅] Selesai! Sukses: {sukses}/{jumlah}{C_RESET}")
     input(f"\n{C_CYAN}Tekan Enter buat balik...{C_RESET}")
@@ -292,7 +228,6 @@ def main():
     
     valid_keys = get_decrypted_keys()
     if not valid_keys:
-        print(f"{C_RED}[❌] File apikey.js nggak ketemu!{C_RESET}")
         sys.exit()
 
     print(f"{C_YELLOW}Masukkan API Key lo: {C_RESET}")
