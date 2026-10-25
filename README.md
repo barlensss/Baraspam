@@ -30,17 +30,9 @@ Dibangun menggunakan **Python**, toolking ini dilengkapi dengan sistem keamanan 
 - 🕵️ **Stealth Mode** - Menggunakan *random User-Agent* & *Random Path* untuk menghindari deteksi WAF.
 - 🧠 **Node.js Decryption** - Mendukung API Key yang sudah di-*obfuscate* biar aman dari *copy-paste*.
 
----
+-----
 
-## 🛠️ PERSIAPAN AWAL (WAJIB)
-
-Sebelum mulai, pastikan HP/PC lo punya koneksi internet yang stabil dan aplikasi **Termux** (khusus Android).
-
-### 1. Install Aplikasi Termux
-Kalau lo pake Android, download **Termux** dari **F-Droid** (jangan dari Play Store, karena versinya udah usang).
-- Link: https://f-droid.org/en/packages/com.termux/
-
-### 2. Buka Termux & Update Sistem
-Buka aplikasi Termux, lalu ketik perintah ini buat update sistem:
+### MINTA APIKEY DI WEBB
+AMPUN OWNER JANGAN BENET AKU🤓
 ```bash
-pkg update && pkg upgrade -y
+Api/token Chat aja Admin Di web, wajib sopan
