@@ -141,46 +141,22 @@ def eksekusi_spam(jumlah):
     print(f"{C_GREEN}[✅] SPAM SELESAI! Sukses: {sukses} | Gagal: {jumlah - sukses} | Waktu: {elapsed:.2f}s{C_RESET}")
 
 # ==========================================
-# MENU 2: SPAM EMAIL (MAILJET API - UI BARU)
+# MENU 2: SPAM EMAIL (MAILJET API - ANTI SPAM)
 # ==========================================
 def kirim_email_mailjet(target, pesan):
-    # UI Baru: Cyberpunk Neon Glassmorphism (Aman di Gmail)
-    img_base64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
-
+    # UI HTML Sederhana (Gak pake gambar base64, gak pake warna aneh-aneh)
+    # Biar Gmail ga curiga
     html_content = f"""
     <!DOCTYPE html>
     <html>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body style="margin: 0; padding: 0; background-color: #080808; font-family: 'Courier New', monospace;">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #080808; padding: 30px 15px;">
-            <tr>
-                <td align="center">
-                    <table width="100%" max-width="550" border="0" cellspacing="0" cellpadding="30" style="background: linear-gradient(135deg, #1a001a 0%, #000000 100%); border: 2px solid #ff003c; border-radius: 15px; text-align: center; box-shadow: 0 0 30px rgba(255, 0, 60, 0.3);">
-                        <tr>
-                            <td>
-                                <h1 style="color: #ff003c; font-size: 32px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 15px #ff003c, 0 0 30px #ff003c;">SYSTEM BREACH</h1>
-                                
-                                <!-- GAMBAR PLACEHOLDER -->
-                                <img src="data:image/png;base64,{img_base64}" width="100%" style="max-height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid #00e5ff; margin-bottom: 25px; display: block;" alt="System Hacked">
-                                
-                                <!-- KOTAK PESAN -->
-                                <div style="background-color: rgba(0, 229, 255, 0.1); border-left: 5px solid #00e5ff; border-right: 5px solid #00e5ff; padding: 20px; text-align: left; color: #ffffff; font-size: 16px; margin-bottom: 30px; line-height: 1.6;">
-                                    {pesan}
-                                </div>
-                                
-                                <!-- FOOTER -->
-                                <div style="font-size: 12px; color: #00e5ff; margin-top: 30px; border-top: 1px dashed #333333; padding-top: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 5px #00e5ff;">
-                                    <strong>DEV: BARA</strong><br>
-                                    <span style="color: #555555; font-size: 10px;">BARA EXPLOIT TOOLKING</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+    <body style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; color: #333333;">
+        <div style="max-width: 500px; margin: auto; border: 1px solid #dddddd; padding: 20px; border-radius: 5px;">
+            <h2 style="color: #333333;">Pesan Penting</h2>
+            <hr style="border: 0; border-top: 1px solid #eeeeee;">
+            <p style="font-size: 16px;">{pesan}</p>
+            <br>
+            <p style="font-size: 14px; color: #888888;">Dikirim oleh: <b>BARA</b></p>
+        </div>
     </body>
     </html>
     """
@@ -193,12 +169,21 @@ def kirim_email_mailjet(target, pesan):
         "Authorization": f"Basic {auth_b64}"
     }
     
+    # SUBJEK AMAN BIAR GA MASUK SPAM
+    subjek_aman = random.choice([
+        "Pesan Penting",
+        "Halo, ada info buat kamu",
+        "Update Terbaru",
+        "Cek ini",
+        "Informasi"
+    ])
+    
     payload = {
         "Messages": [
             {
                 "From": {"Email": MAILJET_SENDER_EMAIL, "Name": MAILJET_SENDER_NAME},
                 "To": [{"Email": target}],
-                "Subject": f"⚠️ WARNING: SYSTEM ALERT {random.randint(100, 999)}",
+                "Subject": f"{subjek_aman} {random.randint(100, 999)}",
                 "HTMLPart": html_content
             }
         ]
@@ -232,7 +217,7 @@ def eksekusi_spam_email():
             print(f"{C_GREEN}[✅] [{i}/{jumlah}] Terkirim!{C_RESET}")
         else:
             print(f"{C_RED}[❌] [{i}/{jumlah}] Gagal: {error_msg}{C_RESET}")
-        time.sleep(1.5) 
+        time.sleep(3) # JEDA 3 DETIK BIAR GMAIL GA CURIGA
         
     print(f"\n{C_GREEN}[✅] Selesai! Sukses: {sukses}/{jumlah}{C_RESET}")
 
