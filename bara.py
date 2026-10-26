@@ -6,7 +6,6 @@ import os
 import sys
 import json
 import subprocess
-import base64
 from concurrent.futures import ThreadPoolExecutor
 
 try:
@@ -22,7 +21,7 @@ except ImportError:
 TARGET_URL = "https://nova-wawa.vercel.app/api/register"
 USED_KEYS_FILE = "used_keys.txt"
 
-# KONFIGURASI BREVO API V3 (PAKE API KEY, BUKAN SMTP)
+# KONFIGURASI BREVO API V3
 BREVO_API_KEY = "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"
 BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
 PENGIRIM_EMAIL = "ttingg48@gmail.com" 
@@ -64,7 +63,6 @@ def animasi_banner():
         time.sleep(0.1)
 
 def get_decrypted_keys():
-    """Fungsi buat ngejalanin Node.js dan ngambil API Key dari apikey.js"""
     if not os.path.exists('get_key.js'):
         print(f"\n{C_RED}[❌] File get_key.js nggak ada di folder ini!{C_RESET}")
         return []
@@ -144,32 +142,52 @@ def eksekusi_spam(jumlah):
     print(f"{C_GREEN}[✅] SPAM SELESAI! Sukses: {sukses} | Gagal: {jumlah - sukses} | Waktu: {elapsed:.2f}s{C_RESET}")
 
 # ==========================================
-# MENU 2: SPAM EMAIL (BREVO API V3)
+# MENU 2: SPAM EMAIL (BREVO API V3 - GMAIL FRIENDLY)
 # ==========================================
 def kirim_email_brevo_api(target, pesan):
+    # HTML Layout pake <table> biar Gmail mau nampilin
+    # Audio diganti jadi Link, gambar pake Base64 (1x1 transparent pixel dulu biar ga error)
+    
     html_content = f"""
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="UTF-8">
-        <style>
-            body {{ margin: 0; padding: 40px; font-family: 'Fira Code', monospace; background: #050505; color: #00ff41; }}
-            .card {{ background: rgba(10, 10, 10, 0.9); border: 2px solid #00ff41; padding: 30px; border-radius: 12px; max-width: 500px; margin: auto; text-align: center; }}
-            .glitch {{ font-size: 28px; font-weight: 900; color: #ff003c; text-transform: uppercase; margin-bottom: 20px; }}
-            .gambar {{ width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid #00ff41; margin-bottom: 20px; }}
-            .pesan-box {{ background: rgba(0, 255, 65, 0.1); border-left: 4px solid #00ff41; padding: 15px; text-align: left; margin-bottom: 25px; }}
-            summary {{ background: #111; border: 1px solid #00ff41; padding: 10px; cursor: pointer; font-weight: bold; text-align: center; }}
-            .footer {{ font-size: 11px; color: #555; margin-top: 30px; }}
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <div class="card">
-            <div class="glitch">SYSTEM BREACH</div>
-            <img src="https://files.catbox.moe/n04bax.png" class="gambar">
-            <div class="pesan-box">{pesan}</div>
-            <details><summary>🔊 BUKA AUDIO</summary><audio controls loop><source src="https://files.catbox.moe/6xi33i.mp3" type="audio/mpeg"></audio></details>
-            <div class="footer">DEV: BARA</div>
-        </div>
+    <body style="margin: 0; padding: 0; background-color: #050505; font-family: 'Courier New', monospace;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #050505; padding: 20px;">
+            <tr>
+                <td align="center">
+                    <table width="100%" max-width="500" border="0" cellspacing="0" cellpadding="20" style="background-color: #111111; border: 2px solid #00ff41; border-radius: 10px; text-align: center;">
+                        <tr>
+                            <td>
+                                <h1 style="color: #ff003c; font-size: 26px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #ff003c;">SYSTEM BREACH</h1>
+                                
+                                <!-- GAMBAR PAKE BASE64 (BIAR GMAIL MUNCULIN TANPA BLOKIR) -->
+                                <!-- Gambar di bawah ini cuma placeholder 1x1 pixel, ganti pake base64 gambar asli lo -->
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=" width="100%" style="max-height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid #00ff41; margin-bottom: 20px; display: block;" alt="System Hacked">
+                                
+                                <div style="background-color: rgba(0, 255, 65, 0.1); border-left: 4px solid #00ff41; padding: 15px; text-align: left; color: #ffffff; font-size: 15px; margin-bottom: 25px; line-height: 1.5;">
+                                    {pesan}
+                                </div>
+                                
+                                <!-- AUDIO DIGANTI LINK (GMAIL NGGAK SUPPORT TAG AUDIO) -->
+                                <div style="margin-bottom: 20px;">
+                                    <a href="https://files.catbox.moe/6xi33i.mp3" target="_blank" style="display: inline-block; background-color: #111111; border: 1px solid #00ff41; color: #00ff41; text-decoration: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; font-size: 14px; text-transform: uppercase;">
+                                        🔊 BUKA AUDIO
+                                    </a>
+                                </div>
+                                
+                                <div style="font-size: 12px; color: #555555; margin-top: 30px; border-top: 1px dashed #333333; padding-top: 15px; text-transform: uppercase; letter-spacing: 1px;">
+                                    DEV: BARA | BARA EXPLOIT
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </body>
     </html>
     """
