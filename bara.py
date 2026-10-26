@@ -140,10 +140,9 @@ def eksekusi_spam(jumlah):
     print(f"{C_GREEN}[✅] SPAM SELESAI! Sukses: {sukses} | Gagal: {jumlah - sukses} | Waktu: {elapsed:.2f}s{C_RESET}")
 
 # ==========================================
-# MENU 2: SPAM EMAIL (ELASTIC EMAIL API)
+# MENU 2: SPAM EMAIL (ELASTIC EMAIL API - FIXED)
 # ==========================================
 def kirim_email_elastic(target, pesan):
-    # UI HTML Sederhana
     html_content = f"""
     <!DOCTYPE html>
     <html>
@@ -159,13 +158,12 @@ def kirim_email_elastic(target, pesan):
     </html>
     """
 
-    # Subjek Aman
     subjek_aman = random.choice([
         "Pesan Penting", "Halo, ada info buat kamu", 
         "Update Terbaru", "Cek ini", "Informasi"
     ])
 
-    # FORMAT BARU ELASTIC EMAIL (OBJECT, BUKAN ARRAY)
+    # FORMAT DIPERBAIKI: Recipients = Object {}, Body = Array []
     payload = {
         "Recipients": {
             "Email": target,
@@ -174,10 +172,12 @@ def kirim_email_elastic(target, pesan):
         "Content": {
             "From": f"{ELASTIC_SENDER_NAME} <{ELASTIC_SENDER_EMAIL}>",
             "Subject": f"{subjek_aman} {random.randint(100, 999)}",
-            "Body": {
-                "ContentType": "HTML",
-                "Content": html_content
-            }
+            "Body": [
+                {
+                    "ContentType": "HTML",
+                    "Content": html_content
+                }
+            ]
         }
     }
 
