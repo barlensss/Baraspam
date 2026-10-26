@@ -6,7 +6,6 @@ import os
 import sys
 import json
 import subprocess
-import base64
 from concurrent.futures import ThreadPoolExecutor
 
 try:
@@ -22,11 +21,11 @@ except ImportError:
 TARGET_URL = "https://nova-wawa.vercel.app/api/register"
 USED_KEYS_FILE = "used_keys.txt"
 
-# --- KONFIGURASI MAILJET ---
-MAILJET_API_KEY = "852c378f1a0e325dc8ef78279aa99858"
-MAILJET_SECRET_KEY = "21d54f4567c06de75b11dc0a9c8d2153"
-MAILJET_SENDER_EMAIL = "partosartini41@gmail.com" 
-MAILJET_SENDER_NAME = "BARA EXPLOIT"
+# --- KONFIGURASI ELASTIC EMAIL ---
+ELASTIC_API_KEY = "562C11AA704AB0FE5531510AEB2A543E54DCF8AB01DDA7D0F3F57A6889B337C2B23B553D3C67DE34D33B068BDAC3811B"
+ELASTIC_SENDER_EMAIL = "ttingg48@gmail.com"
+ELASTIC_SENDER_NAME = "BARA EXPLOIT"
+ELASTIC_API_URL = "https://api.elasticemail.com/v4/emails/transactional"
 
 # Kode Warna ANSI
 C_RED = '\033[91m'
@@ -141,11 +140,10 @@ def eksekusi_spam(jumlah):
     print(f"{C_GREEN}[✅] SPAM SELESAI! Sukses: {sukses} | Gagal: {jumlah - sukses} | Waktu: {elapsed:.2f}s{C_RESET}")
 
 # ==========================================
-# MENU 2: SPAM EMAIL (MAILJET API - ANTI SPAM)
+# MENU 2: SPAM EMAIL (ELASTIC EMAIL API)
 # ==========================================
-def kirim_email_mailjet(target, pesan):
-    # UI HTML Sederhana (Gak pake gambar base64, gak pake warna aneh-aneh)
-    # Biar Gmail ga curiga
+def kirim_email_elastic(target, pesan):
+    # UI HTML Sederhana (Biar Gmail Ga Curiga)
     html_content = f"""
     <!DOCTYPE html>
     <html>
@@ -160,16 +158,8 @@ def kirim_email_mailjet(target, pesan):
     </body>
     </html>
     """
-    
-    auth_string = f"{MAILJET_API_KEY}:{MAILJET_SECRET_KEY}"
-    auth_b64 = base64.b64encode(auth_string.encode()).decode()
-    
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Basic {auth_b64}"
-    }
-    
-    # SUBJEK AMAN BIAR GA MASUK SPAM
+
+    # Subjek Aman
     subjek_aman = random.choice([
         "Pesan Penting",
         "Halo, ada info buat kamu",
@@ -177,21 +167,34 @@ def kirim_email_mailjet(target, pesan):
         "Cek ini",
         "Informasi"
     ])
-    
+
     payload = {
-        "Messages": [
+        "Recipients": [
             {
-                "From": {"Email": MAILJET_SENDER_EMAIL, "Name": MAILJET_SENDER_NAME},
-                "To": [{"Email": target}],
-                "Subject": f"{subjek_aman} {random.randint(100, 999)}",
-                "HTMLPart": html_content
+                "Email": target,
+                "Fields": {}
             }
-        ]
+        ],
+        "Content": {
+            "From": f"{ELASTIC_SENDER_NAME} <{ELASTIC_SENDER_EMAIL}>",
+            "Subject": f"{subjek_aman} {random.randint(100, 999)}",
+            "Body": [
+                {
+                    "ContentType": "HTML",
+                    "Content": html_content
+                }
+            ]
+        }
     }
-    
+
+    headers = {
+        "Content-Type": "application/json",
+        "X-ElasticEmail-ApiKey": ELASTIC_API_KEY
+    }
+
     try:
-        res = requests.post("https://api.mailjet.com/v3.1/send", headers=headers, json=payload, timeout=10)
-        if res.status_code in [200, 201]:
+        res = requests.post(ELASTIC_API_URL, headers=headers, json=payload, timeout=10)
+        if res.status_code in [200, 201, 202]:
             return True, "OK"
         else:
             return False, f"HTTP {res.status_code}: {res.text}"
@@ -200,7 +203,7 @@ def kirim_email_mailjet(target, pesan):
 
 def eksekusi_spam_email():
     clear()
-    print(f"{C_CYAN}=== SPAM EMAIL (MAILJET API) ==={C_RESET}")
+    print(f"{C_CYAN}=== SPAM EMAIL (ELASTIC EMAIL) ==={C_RESET}")
     target = input(f"{C_YELLOW}Email Target: {C_RESET}")
     pesan = input(f"{C_YELLOW}Pesan: {C_RESET}")
     try:
@@ -211,13 +214,13 @@ def eksekusi_spam_email():
     print(f"\n{C_YELLOW}[*] Memproses...{C_RESET}")
     sukses = 0
     for i in range(1, jumlah + 1):
-        berhasil, error_msg = kirim_email_mailjet(target, pesan)
+        berhasil, error_msg = kirim_email_elastic(target, pesan)
         if berhasil:
             sukses += 1
             print(f"{C_GREEN}[✅] [{i}/{jumlah}] Terkirim!{C_RESET}")
         else:
             print(f"{C_RED}[❌] [{i}/{jumlah}] Gagal: {error_msg}{C_RESET}")
-        time.sleep(3) # JEDA 3 DETIK BIAR GMAIL GA CURIGA
+        time.sleep(3) # Jeda 3 detik
         
     print(f"\n{C_GREEN}[✅] Selesai! Sukses: {sukses}/{jumlah}{C_RESET}")
 
@@ -257,7 +260,7 @@ def main():
                 BARA EXPLOIT - MAIN MENU
 ======================================================
 {C_YELLOW}1. {C_WHITE}Spam Register (Nova Wawa)
-{C_YELLOW}2. {C_WHITE}Spam Email (Mailjet API)
+{C_YELLOW}2. {C_WHITE}Spam Email (Elastic Email)
 {C_YELLOW}0. {C_WHITE}Keluar
 {m_c}======================================================
 {C_WHITE}Dev: BARA | Key: {user_key[:5]}***{C_RESET}""")
