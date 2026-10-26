@@ -21,10 +21,10 @@ except ImportError:
 TARGET_URL = "https://nova-wawa.vercel.app/api/register"
 USED_KEYS_FILE = "used_keys.txt"
 
-# --- KONFIGURASI BREVO ---
-BREVO_API_KEY = "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"
+# --- KONFIGURASI BREVO API V3 ---
+BREVO_API_KEY = "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"
 BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
-BREVO_SENDER_EMAIL = "ttingg48@gmail.com" 
+BREVO_SENDER_EMAIL = "partosartini41@gmail.com" 
 BREVO_SENDER_NAME = "BARA EXPLOIT"
 
 # Kode Warna ANSI
