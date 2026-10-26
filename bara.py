@@ -34,7 +34,7 @@ TARGET_URL = "https://nova-wawa.vercel.app/api/register"
 USED_KEYS_FILE = "used_keys.txt"
 
 # KONFIGURASI BREVO API V3
-BREVO_API_KEY = "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"
+BREVO_API_KEY = "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"
 BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
 PENGIRIM_EMAIL = "ttingg48@gmail.com" 
 PENGIRIM_NAMA = "BARA EXPLOIT"
