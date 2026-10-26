@@ -143,7 +143,7 @@ def eksekusi_spam(jumlah):
 # MENU 2: SPAM EMAIL (ELASTIC EMAIL API)
 # ==========================================
 def kirim_email_elastic(target, pesan):
-    # UI HTML Sederhana (Biar Gmail Ga Curiga)
+    # UI HTML Sederhana
     html_content = f"""
     <!DOCTYPE html>
     <html>
@@ -161,29 +161,23 @@ def kirim_email_elastic(target, pesan):
 
     # Subjek Aman
     subjek_aman = random.choice([
-        "Pesan Penting",
-        "Halo, ada info buat kamu",
-        "Update Terbaru",
-        "Cek ini",
-        "Informasi"
+        "Pesan Penting", "Halo, ada info buat kamu", 
+        "Update Terbaru", "Cek ini", "Informasi"
     ])
 
+    # FORMAT BARU ELASTIC EMAIL (OBJECT, BUKAN ARRAY)
     payload = {
-        "Recipients": [
-            {
-                "Email": target,
-                "Fields": {}
-            }
-        ],
+        "Recipients": {
+            "Email": target,
+            "Fields": {}
+        },
         "Content": {
             "From": f"{ELASTIC_SENDER_NAME} <{ELASTIC_SENDER_EMAIL}>",
             "Subject": f"{subjek_aman} {random.randint(100, 999)}",
-            "Body": [
-                {
-                    "ContentType": "HTML",
-                    "Content": html_content
-                }
-            ]
+            "Body": {
+                "ContentType": "HTML",
+                "Content": html_content
+            }
         }
     }
 
@@ -220,7 +214,7 @@ def eksekusi_spam_email():
             print(f"{C_GREEN}[✅] [{i}/{jumlah}] Terkirim!{C_RESET}")
         else:
             print(f"{C_RED}[❌] [{i}/{jumlah}] Gagal: {error_msg}{C_RESET}")
-        time.sleep(3) # Jeda 3 detik
+        time.sleep(3) 
         
     print(f"\n{C_GREEN}[✅] Selesai! Sukses: {sukses}/{jumlah}{C_RESET}")
 
