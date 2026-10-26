@@ -21,8 +21,8 @@ except ImportError:
 TARGET_URL = "https://nova-wawa.vercel.app/api/register"
 USED_KEYS_FILE = "used_keys.txt"
 
-# --- KONFIGURASI BREVO (GANTI API KEY BARU LO) ---
-BREVO_API_KEY = "xkeysib-GANTI_PAKE_API_KEY_BARU_LO" 
+# --- KONFIGURASI BREVO ---
+BREVO_API_KEY = "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"
 BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
 BREVO_SENDER_EMAIL = "ttingg48@gmail.com" 
 BREVO_SENDER_NAME = "BARA EXPLOIT"
